@@ -1,0 +1,27 @@
+- name: play1 
+  gather_facts: false
+  hosts: web-server
+  tasks:
+
+    - name: update and install ngnix servre
+      apt:
+          tags: update
+          update_cache: True
+          name: nginx
+          state: latest
+
+    - name: copy index file
+      copy: 
+        src: ./index.html
+        dest: /var/www/html/index.html
+        mode: '0644' 
+        
+    
+    - name: Restarting the web-server
+      sysvinit: 
+        name: nginx
+        state: restarted
+        enabled: yes
+
+
+  

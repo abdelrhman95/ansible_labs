@@ -1,0 +1,22 @@
+- name: play2
+  gather_facts: false
+  hosts: web-server
+  tasks:
+
+    - name: update cache
+      tags: update
+      apt:
+        update_cache: True
+
+    - name: install nginx
+      tags: install
+      apt:
+        name: nginx
+        state: latest
+
+    - name: copy index file
+      tags: always
+      copy: 
+        src: ./index.html
+        dest: /var/www/html/index.html
+        mode: '0644' 
