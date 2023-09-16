@@ -1,0 +1,47 @@
+- name: play4 with handler
+  gather_facts: True
+  hosts: web-server
+  vars_files: ./variables.yml
+
+  tasks:
+    - name: Install nginx
+      apt:
+        name: "{{item.package_name}}"
+        state: "{{item.package_state}}"
+      loop: "{{ packages }}"
+      notify: copying handler
+      changed_when: 1 == 1
+
+
+
+  handlers:
+    - name: copying handler
+      copy:
+        src: "{{item.src}}"
+        dest: "{{item.dest}}"
+      loop: "{{copying}}"
+      notify: restart service handler
+      changed_when: 1 == 1
+
+
+
+    - name: restart service handler
+      sysvinit: 
+        name: "{{item.package_name}}"
+        state: restarted
+        enabled: yes 
+      loop: "{{packages}}"      
+
+
+
+  
+
+  
+
+
+
+
+
+    
+
+

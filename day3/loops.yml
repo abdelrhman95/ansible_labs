@@ -1,0 +1,10 @@
+- name: play with loops
+  gather_facts: false
+  hosts: web-server
+  vars_files: ./variables.yml
+  tasks:
+    - name: Install packages
+      apt:
+        name: "{{item.package_name }}"
+        state: "{{item.package_state }}"
+      loop: "{{ packages }}"

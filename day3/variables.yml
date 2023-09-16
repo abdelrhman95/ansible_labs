@@ -1,0 +1,18 @@
+packages:
+  - {package_name: "nginx", package_state: "present"}
+  #- {package_name: "mariadb-server", package_state: "latest"}
+ # - {package_name: "curl", package_state: "absent"}
+
+
+copying:
+  #- {src: "./index.html", dest: "/var/www/html/index.html"}
+  - {src: "./file.css", dest: "/var/www/html/"}
+  - {src: "./file.js", dest: "/var/www/html/"}
+
+
+template:
+  - {src: "./index.html.j2", dest: "/var/www/html/index.html"}
+
+
+temlate_msg:
+  hello from ITI

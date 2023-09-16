@@ -1,0 +1,6 @@
+[web-server]
+172.17.0.2
+
+[all:vars]
+package_name=httpd
+package_state=latest
