@@ -1,0 +1,13 @@
+- name: Install nginx  web-server
+  apt:
+    name: "{{ package }}"
+    state: present
+  notify: Copying files
+  changed_when: true
+ 
+
+- name: Copying dynamic files
+  template: 
+   src: "{{ template_file}}"
+   dest: "/var/www/html/index.html"
+  notify: Restart service

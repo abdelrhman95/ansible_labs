@@ -1,0 +1,21 @@
+- name: Install nginx  web-server
+  apt:
+    name: "{{item.package_name}}"
+    state: "{{item.package_state}}"
+  loop: "{{packages}}"
+  #changed_when: true
+  register: Install_resutl
+
+- name: Copying my_files
+  copy: 
+   src: "{{item}}"
+   dest: /var/www/html/
+  loop: "{{my_files}}"
+  when: Install_resutl.changed == True
+  register: result_copy
+
+- name: Restart web-server
+  sysvinit: 
+    name: nginx
+    state: restarted
+  when: result_copy.changed == True

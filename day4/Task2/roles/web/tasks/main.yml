@@ -1,0 +1,8 @@
+- name: Install nginx  web-server
+  apt:
+    name: "{{package}}"
+    state: present
+  notify: handler Copying
+  changed_when: True
+
+

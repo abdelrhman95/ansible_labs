@@ -1,0 +1,15 @@
+package: "nginx"
+ 
+
+
+my_files:
+  #- {src: "./index.html", dest: "/var/www/html/index.html"}
+  - file.js
+  - file.css 
+
+
+template_file: index.html.j2
+
+
+temlate_msg:
+  hello from ITI
